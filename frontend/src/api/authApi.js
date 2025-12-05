@@ -7,7 +7,7 @@ export const signup = async ({ name, email, password }) => {
     email,
     password,
   });
-  return res.data; // { user, token }
+  return res.data; 
 };
 
 export const login = async ({ email, password }) => {
@@ -15,10 +15,10 @@ export const login = async ({ email, password }) => {
     email,
     password,
   });
-  return res.data; // { user, token }
+  return res.data; 
 };
 
 export const getMe = async () => {
   const res = await axiosClient.get('/api/auth/me');
-  return res.data; // { user }
+  return res.data; 
 };

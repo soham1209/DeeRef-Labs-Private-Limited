@@ -3,7 +3,6 @@ import axiosClient from './axiosClient';
 
 export const fetchChannels = async () => {
   const res = await axiosClient.get('/api/channels');
-  // Map backend `_id` to `id` for frontend
   const channels = res.data.channels.map((c) => ({
     ...c,
     id: c._id,

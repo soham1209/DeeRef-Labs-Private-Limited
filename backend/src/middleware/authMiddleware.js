@@ -5,7 +5,7 @@ import User from '../models/User.js';
 export const protect = async (req, res, next) => {
   let token;
 
-  // Expect token as "Bearer <token>" in Authorization header
+  // Expect token as "Bearer token" in Authorization header
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer ')

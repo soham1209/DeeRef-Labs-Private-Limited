@@ -11,12 +11,12 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.use(protect); // all routes below require auth
+router.use(protect); 
 
-router.get('/', getChannels);          // GET /api/channels
-router.post('/', createChannel);       // POST /api/channels
-router.get('/:id', getChannelById);    // GET /api/channels/:id
-router.post('/:id/join', joinChannel); // POST /api/channels/:id/join
-router.post('/:id/leave', leaveChannel); // POST /api/channels/:id/leave
+router.get('/', getChannels);          
+router.post('/', createChannel);       
+router.get('/:id', getChannelById);    
+router.post('/:id/join', joinChannel); 
+router.post('/:id/leave', leaveChannel); 
 
 export default router;

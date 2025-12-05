@@ -5,9 +5,8 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router({ mergeParams: true });
 
-router.use(protect); // all routes need auth
+router.use(protect); 
 
-// /api/channels/:channelId/messages
 router.get('/', getChannelMessages);
 router.post('/', createMessage);
 

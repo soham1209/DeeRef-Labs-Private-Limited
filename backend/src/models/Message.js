@@ -19,7 +19,7 @@ const messageSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  { timestamps: true } // createdAt = timestamp for pagination
+  { timestamps: true } 
 );
 
 const Message = mongoose.model('Message', messageSchema);

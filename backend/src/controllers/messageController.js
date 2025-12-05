@@ -65,7 +65,7 @@ export const createMessage = async (req, res) => {
       return res.status(404).json({ message: 'Channel not found' });
     }
 
-    // Optionally: ensure user is member
+    // ensureing user is member
     if (!channel.members.some((m) => m.equals(req.user._id))) {
       return res.status(403).json({ message: 'You are not a member of this channel' });
     }

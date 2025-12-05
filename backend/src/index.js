@@ -39,10 +39,9 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/channels", channelRoutes);
-// nested: /api/channels/:channelId/messages
 app.use("/api/channels/:channelId/messages", messageRoutes);
 
-// Error handling
+// Basic eror handling
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ message: "Something went wrong" });
@@ -58,7 +57,7 @@ const io = new Server(server, {
   },
 });
 
-const onlineUsers = new Map(); // userId -> { sockets: Set<socketId>, user: { id, name, avatar, status } }
+const onlineUsers = new Map(); 
 
 const broadcastOnlineUsers = () => {
   const list = Array.from(onlineUsers.values()).map((entry) => entry.user);
@@ -128,7 +127,6 @@ io.on("connection", async (socket) => {
     try {
       if (!channelId || !message) return;
 
-      // Broadcast to everyone in this channel room (including sender)
       io.to(`channel:${channelId}`).emit("newMessage", {
         channelId,
         message,
@@ -144,8 +142,6 @@ io.on("connection", async (socket) => {
 
     const entry = onlineUsers.get(userId);
     if (!entry || !entry.user) return;
-
-    // send to others in this channel
     socket.to(`channel:${channelId}`).emit("userTyping", {
       channelId,
       user: entry.user, // { id, name, avatar, status }

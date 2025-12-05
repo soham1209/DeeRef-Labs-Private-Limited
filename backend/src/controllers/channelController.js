@@ -83,7 +83,7 @@ export const joinChannel = async (req, res) => {
 
     const userId = req.user._id;
 
-    // ❗ rule: you can only join public channels via this endpoint
+    // rula: you can only join public channels via this endpoint
     if (channel.isPrivate) {
       return res
         .status(403)

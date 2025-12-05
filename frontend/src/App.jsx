@@ -103,7 +103,6 @@ export default function App() {
       setMessagesByChannel((prev) => {
         const existing = prev[channelId] || [];
 
-        // avoid duplicate when sender also receives its own broadcast
         if (existing.some((m) => m.id === message.id)) {
           return prev;
         }
@@ -164,7 +163,8 @@ export default function App() {
   }, [socket, activeChannelId]);
 
   const prevChannelRef = useRef(null);
-  // Handle joining/leaving channels on socket when activeChannelId changes
+
+  // Handle joining & leaving channels on socket when activeChannelId changes
   useEffect(() => {
     if (!socket || !activeChannelId) return;
 
@@ -224,10 +224,10 @@ export default function App() {
         let updated;
 
         if (replace || existing.length === 0 || !cursorToUse) {
-          // First load / full replace
+          
           updated = messages;
         } else {
-          // Prepend older messages
+          
           updated = [...messages, ...existing];
         }
 

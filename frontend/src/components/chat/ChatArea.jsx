@@ -27,7 +27,7 @@ const ChatArea = ({
   const [isTyping, setIsTyping] = useState(false);
   const typingTimeoutRef = useRef(null);
 
-  // Auto-scroll to bottom on new messages / channel change
+  // Auto-scroll to bottom on new messages and when channel changes
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length, channel.id]);
@@ -116,7 +116,6 @@ const ChatArea = ({
         emitStopTyping();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const showTopLoader = hasMore && (isLoadingMore || localLoading);
@@ -159,7 +158,6 @@ const ChatArea = ({
               Leave
             </Button>
           )}
-          {/* you can add avatars here if you want */}
         </div>
       </div>
 
@@ -216,11 +214,11 @@ const ChatArea = ({
                   className={`group flex gap-3 ${isSequence ? "mt-1" : "mt-4"}`}
                 >
                   {!isSequence ? (
-                    <div className="flex-shrink-0 pt-1">
+                    <div className="shrink-0 pt-1">
                       <Avatar name={user.name} url={user.avatar} size="md" />
                     </div>
                   ) : (
-                    <div className="w-9 flex-shrink-0 text-[10px] text-gray-300 text-right opacity-0 group-hover:opacity-100 select-none pt-2">
+                    <div className="w-9 shrink-0 text-[10px] text-gray-300 text-right opacity-0 group-hover:opacity-100 select-none pt-2">
                       {new Date(msg.timestamp).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -271,7 +269,7 @@ const ChatArea = ({
                   ? `Message #${channel.name}`
                   : "Join this channel to start messaging"
               }
-              className="w-full max-h-60 min-h-[80px] resize-none focus:outline-none text-gray-900 placeholder-gray-400 bg-transparent"
+              className="w-full max-h-60 min-h-20 resize-none focus:outline-none text-gray-900 placeholder-gray-400 bg-transparent"
               rows={1}
               disabled={!isMember}
             />
@@ -279,7 +277,7 @@ const ChatArea = ({
             <div className="flex justify-between items-center mt-2">
               <Button
                 variant="ghost"
-                className="!text-gray-400 hover:!text-gray-600 !p-1"
+                className="text-gray-400! hover:text-gray-600! p-1!"
               >
                 <Plus size={18} />
               </Button>
